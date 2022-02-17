@@ -10,9 +10,9 @@ export const Header: React.FC<HeaderProps> = ({ title }) => {
 		<Row justify="center" align="center">
 			<Text
 				h1
-				size="xx-large"
+				size="xxx-large"
 				css={{
-					textGradient: '45deg, $yellow500 -20%, $red500 100%',
+					textGradient: '45deg, #F08030 -20%, #6890F0 100%',
 				}}
 				weight="bold"
 			>

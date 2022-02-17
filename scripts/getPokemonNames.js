@@ -7,7 +7,7 @@ fetch('https://pokeapi.co/api/v2/pokemon?limit=2000')
 	.then((res) => res.json())
 	.then((data) => {
 		const pokemon = [...data.results];
-		const names = pokemon.map((p) => p.name).filter((p) => !p.includes('-'));
+		const names = pokemon.map((p) => p.name);
 		const shuffled = _.shuffle(names);
 
 		const buffer = shuffled.join('\n');

@@ -2,8 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
-#root {
-	height: 100vh;
-	width: 100vw;
+html,
+body {
+	height: 100%;
 	color: white;
+	background-color: #111827;
+}
+
+.silhouette {
+	-webkit-filter: contrast(0) sepia(100%) hue-rotate(190deg) saturate(2000%)
+		brightness(100%);
+	filter: contrast(0) sepia(100%) hue-rotate(190deg) saturate(2000%)
+		brightness(100%);
+	opacity: 1;
+}
+
+::selection {
+	background: rgb(226, 43, 202) !important;
+	color: white !important;
+	-webkit-text-fill-color: white !important;
 }

@@ -11,6 +11,7 @@
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
+		"@stitches/react": "^1.2.6",
 		"dayjs": "^1.10.7",
 		"lodash": "^4.17.21",
 		"node-fetch": "^3.2.0"

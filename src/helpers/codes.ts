@@ -1,3 +1,5 @@
+import { ArtType } from '../utils/getRandomArt';
+
 export enum Status {
 	IN_PROGRESS = 'IN_PROGRESS',
 	WIN = 'WIN',
@@ -9,6 +11,8 @@ export type GameState = {
 	gameStatus: Status;
 	lastCompletedTs: Date | null;
 	lastPlayedTs: Date | null;
+	artType: ArtType;
+	health: number;
 	solution: string;
 };
 

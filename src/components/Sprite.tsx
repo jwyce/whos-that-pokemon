@@ -10,8 +10,8 @@ export const Sprite: React.FC<SpriteProps> = ({ url, hidden }) => {
 		<img
 			{...(hidden ? { className: 'silhouette' } : {})}
 			src={url}
-			height={300}
-			width={300}
+			style={{ userSelect: 'none', height: '350px' }}
+			draggable={false}
 		/>
 	);
 };

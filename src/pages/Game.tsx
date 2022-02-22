@@ -11,6 +11,7 @@ import { GameState, GameStats, Status } from '../helpers/codes';
 import { useStorage } from '../hooks/useLocalStorage';
 import { getRandomArt, getRandomInt } from '../utils/getRandomArt';
 import { todaysPokemon } from '../utils/todaysPokemon';
+import { useFetchPokemon } from '../hooks/useFetchPokemon';
 
 const initState = (): GameState => {
 	const secretPokemon = todaysPokemon();
@@ -46,35 +47,37 @@ export const Game: React.FC<{}> = ({}) => {
 		setState(initState());
 	}
 
-	const { isLoading, data, error } = useQuery('secret', async () => {
-		const response = await fetch(
-			`https://pokeapi.co/api/v2/pokemon/${gameState.solution}/`
-		);
-		if (!response.ok) {
-			throw new Error('Network response error');
-		}
-		return response.json();
-	});
+	const { loading, error, pokemon, species } = useFetchPokemon(
+		gameState.solution
+	);
 
-	if (isLoading) {
+	if (loading) {
 		return (
 			<Container alignItems="center" justify="center">
-				<Loading color="primary">Primary</Loading>
+				<Loading color="primary" />
 			</Container>
 		);
 	}
+
+	if (error) {
+		<Text h3 size="large" color="error">
+			Oops! Something went wrong.
+		</Text>;
+	}
+
+	console.log('species', species);
 
 	return (
 		<>
 			<Header
 				title="Who's that Pokemon?"
-				type1={data.types[0]?.type?.name ?? ''}
-				type2={data.types[1]?.type?.name ?? ''}
+				type1={pokemon.types[0]?.type?.name ?? ''}
+				type2={pokemon.types[1]?.type?.name ?? ''}
 			/>
 			<HealthBar health={gameState.health} />
-			<div className="grid place-items-center">
+			<div className="grid place-items-center pt-4">
 				<Sprite
-					url={getRandomArt(data, gameState.artType)}
+					url={getRandomArt(pokemon, gameState.artType)}
 					hidden={gameState.gameStatus === Status.IN_PROGRESS}
 				/>
 				<div
@@ -86,17 +89,26 @@ export const Game: React.FC<{}> = ({}) => {
 						paddingTop: '1rem',
 					}}
 				>
-					{data.types.map((type: any, index: number) => (
+					{pokemon.types.map((type: any, index: number) => (
 						<Type key={index} title={type.type.name} />
 					))}
 				</div>
 				<div className="pt-2">
 					<b>height: </b>
-					{data.height} decimeters
+					{pokemon.height} decimeters
 				</div>
 				<div>
 					<b>weight: </b>
-					{data.weight} hectograms
+					{pokemon.weight} hectograms
+				</div>
+				<div className="pt-2">{species.generation.name}</div>
+				<div className="pt-2">
+					{species.flavor_text_entries.at(1).flavor_text}
+				</div>
+				<div className="pt-2">
+					<Text>
+						{pokemon.abilities.map((x: any) => x.ability.name).join(', ')}
+					</Text>
 				</div>
 			</div>
 		</>

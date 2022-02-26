@@ -18,6 +18,7 @@
     "react-query": "^3.34.15"
   },
   "devDependencies": {
+    "@types/canvas-confetti": "^1.4.2",
     "@types/fast-levenshtein": "^0.0.2",
     "@types/react": "^17.0.33",
     "@types/react-dom": "^17.0.10",

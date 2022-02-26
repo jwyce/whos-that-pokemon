@@ -1,3 +1,5 @@
+import confetti from 'canvas-confetti';
+import * as levenshtein from 'fast-levenshtein';
 import React, { useState } from 'react';
 
 import {
@@ -11,18 +13,17 @@ import {
 
 import { Header } from '../components/Header';
 import { HealthBar } from '../components/HealthBar';
-import { Sprite } from '../components/PokemonInfo/Sprite';
-import { GameState, GameStats, Status } from '../helpers/codes';
-import { useStorage } from '../hooks/useLocalStorage';
-import { getRandomArt, getRandomInt } from '../utils/getRandomArt';
-import { todaysPokemon } from '../utils/todaysPokemon';
-import { useFetchPokemon } from '../hooks/useFetchPokemon';
-import { PokemonType } from '../components/PokemonInfo/PokemonType';
-import { PokemonSize } from '../components/PokemonInfo/PokemonSize';
 import { GenerationDexNum } from '../components/PokemonInfo/GenerationDexNum';
 import { PokemonAbilities } from '../components/PokemonInfo/PokemonAbilities';
 import { PokemonFlavorText } from '../components/PokemonInfo/PokemonFlavorText';
-import * as levenshtein from 'fast-levenshtein';
+import { PokemonSize } from '../components/PokemonInfo/PokemonSize';
+import { PokemonType } from '../components/PokemonInfo/PokemonType';
+import { Sprite } from '../components/PokemonInfo/Sprite';
+import { GameState, GameStats, Status } from '../helpers/codes';
+import { useFetchPokemon } from '../hooks/useFetchPokemon';
+import { useStorage } from '../hooks/useLocalStorage';
+import { getRandomArt, getRandomInt } from '../utils/getRandomArt';
+import { todaysPokemon } from '../utils/todaysPokemon';
 
 const initState = (): GameState => {
 	const secretPokemon = todaysPokemon();
@@ -48,6 +49,15 @@ const initStats = (): GameStats => {
 		maxStreak: 0,
 		currentStreak: 0,
 	};
+};
+
+const handleConfetti = () => {
+	confetti({
+		zIndex: 999,
+		particleCount: 100,
+		spread: 70,
+		origin: { x: 0.5, y: 0.8 },
+	});
 };
 
 export const Game: React.FC<{}> = ({}) => {
@@ -92,6 +102,7 @@ export const Game: React.FC<{}> = ({}) => {
 				lastPlayedTs: new Date().getTime(),
 				gameStatus: Status.WIN,
 			});
+			handleConfetti();
 		}
 	};
 
@@ -139,15 +150,27 @@ export const Game: React.FC<{}> = ({}) => {
 							}
 						/>
 
-						<Sprite
-							url={getRandomArt(pokemon, gameState.artType)}
-							revealed={gameState.gameStatus === Status.IN_PROGRESS}
-							visible={
-								gameState.health <= 20 || gameState.gameStatus === Status.WIN
-							}
-						/>
-						<Spacer y={2} />
+						<div
+							className="text-center"
+							onMouseEnter={() => {
+								if (gameState.gameStatus === Status.WIN) {
+									handleConfetti();
+								}
+							}}
+						>
+							<Sprite
+								url={getRandomArt(pokemon, gameState.artType)}
+								revealed={gameState.gameStatus === Status.IN_PROGRESS}
+								visible={
+									gameState.health <= 20 || gameState.gameStatus === Status.WIN
+								}
+							/>
+							<Spacer y={2} />
 
+							<Text h2 size={41} weight="bold" transform="capitalize">
+								It's {gameState.solution}!!
+							</Text>
+						</div>
 						<div
 							className={`flex gap-4 justify-center items-center pt-1 ${
 								gameState.gameStatus !== Status.IN_PROGRESS ? 'hidden' : ''
@@ -169,9 +192,6 @@ export const Game: React.FC<{}> = ({}) => {
 								Guess
 							</Button>
 						</div>
-						<Text h2 size={41} weight="bold" transform="capitalize">
-							It's {gameState.solution}!!
-						</Text>
 					</div>
 				</>
 			)}

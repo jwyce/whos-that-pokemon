@@ -94,10 +94,11 @@ export const Game: React.FC<{}> = ({}) => {
 				lastPlayedTs: new Date().getTime(),
 			});
 
-			if (gameState.health <= 0) {
+			if (gameState.health <= 10) {
 				setGuess('');
 				setState({
 					...gameState,
+					health: gameState.health - 10,
 					lastCompletedTs: new Date().getTime(),
 					lastPlayedTs: new Date().getTime(),
 					gameStatus: Status.FAIL,
@@ -108,8 +109,7 @@ export const Game: React.FC<{}> = ({}) => {
 					currentStreak: 0,
 					winPercent: (gameStats.gamesWon / (gameStats.gamesPlayed + 1)) * 100,
 					averageScore:
-						(gameStats.averageScore * gameStats.gamesPlayed +
-							gameState.health) /
+						(gameStats.averageScore * gameStats.gamesPlayed) /
 						(gameStats.gamesPlayed + 1),
 				});
 			}

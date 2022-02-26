@@ -22,6 +22,7 @@ import { PokemonSize } from '../components/PokemonInfo/PokemonSize';
 import { GenerationDexNum } from '../components/PokemonInfo/GenerationDexNum';
 import { PokemonAbilities } from '../components/PokemonInfo/PokemonAbilities';
 import { PokemonFlavorText } from '../components/PokemonInfo/PokemonFlavorText';
+import * as levenshtein from 'fast-levenshtein';
 
 const initState = (): GameState => {
 	const secretPokemon = todaysPokemon();
@@ -49,7 +50,6 @@ const initStats = (): GameStats => {
 	};
 };
 
-
 export const Game: React.FC<{}> = ({}) => {
 	const [gameState, setState] = useStorage<GameState>('gameState', initState());
 	const [gameStats, setStats] = useStorage<GameStats>('gameStats', initStats());
@@ -71,10 +71,7 @@ export const Game: React.FC<{}> = ({}) => {
 		);
 	}
 
-  const makeGuess = () => {
-    if ()
-
-  }
+	const makeGuess = () => {};
 
 	return (
 		<>

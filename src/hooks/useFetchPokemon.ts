@@ -1,11 +1,12 @@
 import { useQuery } from 'react-query';
+import { Pokemon, PokemonSpecies } from '../interfaces/pokemon';
 
 export const useFetchPokemon = (solution: string) => {
 	const {
 		isLoading: loading,
 		data: pokemon,
 		error,
-	} = useQuery('pokemon', async () => {
+	} = useQuery<Pokemon, Error>('pokemon', async () => {
 		const response = await fetch(
 			`https://pokeapi.co/api/v2/pokemon/${solution}/`
 		);
@@ -23,7 +24,7 @@ export const useFetchPokemon = (solution: string) => {
 		isLoading: loading2,
 		data: species,
 		error: error2,
-	} = useQuery('species', async () => {
+	} = useQuery<PokemonSpecies, Error>('species', async () => {
 		const response = await fetch(
 			`https://pokeapi.co/api/v2/pokemon-species/${speciesName}`
 		);

@@ -16,7 +16,7 @@ Spin off the New York Time's Wordle game, but with Pokemon!
   - [x] Silhouette [-20 health]
   - [x] Name and front sprite [-20 health]
 - [ ] save streak and avg score (health)
-- [ ] animations?
-- [ ] on game over, header text becomes white and bg becomes gradiant
-- [ ] header text is: It's \<name>!
-- [ ] add ability to share results with friends (popup?)
+  - [ ] model with statics
+- [ ] more animations?
+- [x] on game over, show all info and show pokemon name with confetti
+- [ ] add ability to share results with friends (model?)

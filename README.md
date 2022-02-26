@@ -16,10 +16,10 @@ Spin off the New York Time's Wordle game, but with Pokemon!
   - [x] Silhouette [-20 health]
   - [x] Name and front sprite [-20 health]
 - [ ] save streak and avg score (health)
-  - [ ] model with statics
+  - [ ] modal with statics
 - [ ] more animations?
 - [ ] show previous guesses?
 - [ ] hide pokedex number until game over
 - [ ] add logic for loosing
 - [x] on game over, show all info and show pokemon name with confetti
-- [ ] add ability to share results with friends (model?)
+- [ ] add ability to share results with friends (modal?)

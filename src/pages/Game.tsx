@@ -71,7 +71,29 @@ export const Game: React.FC<{}> = ({}) => {
 		);
 	}
 
-	const makeGuess = () => {};
+	const makeGuess = () => {
+		const dist = levenshtein.get(
+			guess.toLowerCase(),
+			gameState.solution.toLowerCase()
+		);
+
+		if (dist > 2) {
+			setGuess('');
+			setState({
+				...gameState,
+				health: gameState.health - 10,
+				lastPlayedTs: new Date().getTime(),
+			});
+		} else {
+			setGuess('');
+			setState({
+				...gameState,
+				lastCompletedTs: new Date().getTime(),
+				lastPlayedTs: new Date().getTime(),
+				gameStatus: Status.WIN,
+			});
+		}
+	};
 
 	return (
 		<>
@@ -93,41 +115,63 @@ export const Game: React.FC<{}> = ({}) => {
 						<PokemonSize
 							height={pokemon.height}
 							weight={pokemon.weight}
-							visible={gameState.health <= 90}
+							visible={
+								gameState.health <= 90 || gameState.gameStatus === Status.WIN
+							}
 						/>
 						<GenerationDexNum
 							generation={species.generation}
 							dexnums={species.pokedex_numbers}
-							visible={gameState.health <= 80}
+							visible={
+								gameState.health <= 80 || gameState.gameStatus === Status.WIN
+							}
 						/>
 						<PokemonAbilities
 							abilities={pokemon.abilities}
-							visible={gameState.health <= 70}
+							visible={
+								gameState.health <= 70 || gameState.gameStatus === Status.WIN
+							}
 						/>
 						<PokemonFlavorText
 							flavorTexts={species.flavor_text_entries}
-							visible={gameState.health <= 50}
+							visible={
+								gameState.health <= 50 || gameState.gameStatus === Status.WIN
+							}
 						/>
 
 						<Sprite
 							url={getRandomArt(pokemon, gameState.artType)}
 							revealed={gameState.gameStatus === Status.IN_PROGRESS}
-							visible={gameState.health <= 30}
+							visible={
+								gameState.health <= 20 || gameState.gameStatus === Status.WIN
+							}
 						/>
 						<Spacer y={2} />
 
-						<div className="flex gap-4 justify-center items-center pt-1">
+						<div
+							className={`flex gap-4 justify-center items-center pt-1 ${
+								gameState.gameStatus !== Status.IN_PROGRESS ? 'hidden' : ''
+							}`}
+						>
 							<Input
 								clearable
 								bordered
 								labelPlaceholder="Pokemon name"
 								value={guess}
 								onChange={(e) => setGuess(e.target.value)}
+								onKeyDown={(e) => {
+									if (e.key === 'Enter') {
+										makeGuess();
+									}
+								}}
 							/>
-							<Button color="gradient" auto>
+							<Button color="gradient" auto onClick={makeGuess}>
 								Guess
 							</Button>
 						</div>
+						<Text h2 size={41} weight="bold" transform="capitalize">
+							It's {gameState.solution}!!
+						</Text>
 					</div>
 				</>
 			)}

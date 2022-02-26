@@ -11,7 +11,6 @@ export const PokemonSize: React.FC<PokemonSizeProps> = ({
 	weight,
 	visible,
 }) => {
-	console.log(visible);
 	return (
 		<div
 			className={`flex gap-4 justify-center items-center ${

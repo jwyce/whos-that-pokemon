@@ -9,8 +9,8 @@ export enum Status {
 export type GameState = {
 	boardState: string[];
 	gameStatus: Status;
-	lastCompletedTs: Date | null;
-	lastPlayedTs: Date | null;
+	lastCompletedTs: number | null;
+	lastPlayedTs: number | null;
 	artType: ArtType;
 	health: number;
 	solution: string;

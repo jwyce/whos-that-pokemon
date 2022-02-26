@@ -28,7 +28,7 @@ export interface PokemonSpecies {
 	flavor_text_entries: FlavorTextEntry[];
 	generation: { name: string };
 	names: PokemonName[];
-	dexNums: PokedexNumber[];
+	pokedex_numbers: PokedexNumber[];
 }
 
 export interface FlavorTextEntry {

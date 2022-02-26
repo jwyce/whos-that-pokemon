@@ -104,7 +104,13 @@ export const Game: React.FC<{}> = ({}) => {
 							{species.generation.name.split('-')[0]}-
 							<span className="uppercase">
 								{species.generation.name.split('-')[1]}
-							</span>
+							</span>{' '}
+							: #
+							{
+								species.pokedex_numbers.filter(
+									(x) => x.pokedex.name === 'national'
+								)[0].entry_number
+							}
 						</div>
 						<div className="pt-2">
 							{

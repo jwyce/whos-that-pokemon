@@ -167,7 +167,13 @@ export const Game: React.FC<{}> = ({}) => {
 							/>
 							<Spacer y={2} />
 
-							<Text h2 size={41} weight="bold" transform="capitalize">
+							<Text
+								h2
+								size={41}
+								weight="bold"
+								transform="capitalize"
+								hidden={gameState.gameStatus === Status.IN_PROGRESS}
+							>
 								It's {gameState.solution}!!
 							</Text>
 						</div>

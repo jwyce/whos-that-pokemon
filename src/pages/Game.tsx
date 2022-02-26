@@ -11,8 +11,7 @@ import {
 
 import { Header } from '../components/Header';
 import { HealthBar } from '../components/HealthBar';
-import { Sprite } from '../components/Sprite';
-import { Type } from '../components/Type';
+import { Sprite } from '../components/PokemonInfo/Sprite';
 import { GameState, GameStats, Status } from '../helpers/codes';
 import { useStorage } from '../hooks/useLocalStorage';
 import { getRandomArt, getRandomInt } from '../utils/getRandomArt';
@@ -50,6 +49,7 @@ const initStats = (): GameStats => {
 	};
 };
 
+
 export const Game: React.FC<{}> = ({}) => {
 	const [gameState, setState] = useStorage<GameState>('gameState', initState());
 	const [gameStats, setStats] = useStorage<GameStats>('gameStats', initStats());
@@ -71,6 +71,11 @@ export const Game: React.FC<{}> = ({}) => {
 		);
 	}
 
+  const makeGuess = () => {
+    if ()
+
+  }
+
 	return (
 		<>
 			{error || !pokemon || !species ? (
@@ -88,17 +93,29 @@ export const Game: React.FC<{}> = ({}) => {
 					<Spacer y={2} />
 					<div className="grid place-items-center pt-4">
 						<PokemonType types={pokemon.types} />
-						<PokemonSize height={pokemon.height} weight={pokemon.weight} />
+						<PokemonSize
+							height={pokemon.height}
+							weight={pokemon.weight}
+							visible={gameState.health <= 90}
+						/>
 						<GenerationDexNum
 							generation={species.generation}
 							dexnums={species.pokedex_numbers}
+							visible={gameState.health <= 80}
 						/>
-						<PokemonAbilities abilities={pokemon.abilities} />
-						<PokemonFlavorText flavorTexts={species.flavor_text_entries} />
+						<PokemonAbilities
+							abilities={pokemon.abilities}
+							visible={gameState.health <= 70}
+						/>
+						<PokemonFlavorText
+							flavorTexts={species.flavor_text_entries}
+							visible={gameState.health <= 50}
+						/>
 
 						<Sprite
 							url={getRandomArt(pokemon, gameState.artType)}
-							hidden={gameState.gameStatus === Status.IN_PROGRESS}
+							revealed={gameState.gameStatus === Status.IN_PROGRESS}
+							visible={gameState.health <= 30}
 						/>
 						<Spacer y={2} />
 

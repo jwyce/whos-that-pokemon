@@ -3,11 +3,21 @@ import React from 'react';
 interface PokemonSizeProps {
 	height: number;
 	weight: number;
+	visible: boolean;
 }
 
-export const PokemonSize: React.FC<PokemonSizeProps> = ({ height, weight }) => {
+export const PokemonSize: React.FC<PokemonSizeProps> = ({
+	height,
+	weight,
+	visible,
+}) => {
+	console.log(visible);
 	return (
-		<div className="flex gap-4 justify-center items-center">
+		<div
+			className={`flex gap-4 justify-center items-center ${
+				visible ? '' : 'hidden'
+			}`}
+		>
 			<div>
 				<b>Height: </b>
 				{height} decimeters

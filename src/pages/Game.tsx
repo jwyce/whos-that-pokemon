@@ -93,6 +93,26 @@ export const Game: React.FC<{}> = ({}) => {
 				health: gameState.health - 10,
 				lastPlayedTs: new Date().getTime(),
 			});
+
+			if (gameState.health <= 0) {
+				setGuess('');
+				setState({
+					...gameState,
+					lastCompletedTs: new Date().getTime(),
+					lastPlayedTs: new Date().getTime(),
+					gameStatus: Status.FAIL,
+				});
+				setStats({
+					...gameStats,
+					gamesPlayed: gameStats.gamesPlayed + 1,
+					currentStreak: 0,
+					winPercent: (gameStats.gamesWon / (gameStats.gamesPlayed + 1)) * 100,
+					averageScore:
+						(gameStats.averageScore * gameStats.gamesPlayed +
+							gameState.health) /
+						(gameStats.gamesPlayed + 1),
+				});
+			}
 		} else {
 			setGuess('');
 			setState({
@@ -101,12 +121,24 @@ export const Game: React.FC<{}> = ({}) => {
 				lastPlayedTs: new Date().getTime(),
 				gameStatus: Status.WIN,
 			});
+			setStats({
+				...gameStats,
+				gamesPlayed: gameStats.gamesPlayed + 1,
+				gamesWon: gameStats.gamesWon + 1,
+				maxStreak: Math.max(gameStats.maxStreak, gameStats.currentStreak),
+				currentStreak: gameStats.currentStreak + 1,
+				winPercent:
+					((gameStats.gamesWon + 1) / (gameStats.gamesPlayed + 1)) * 100,
+				averageScore:
+					(gameStats.averageScore * gameStats.gamesPlayed + gameState.health) /
+					(gameStats.gamesPlayed + 1),
+			});
 			handleConfetti();
 		}
 	};
 
 	return (
-		<>
+		<div style={{ maxWidth: '800px', margin: 'auto' }}>
 			{error || !pokemon || !species ? (
 				<Text h3 size="large" color="error">
 					Oops! Something went wrong.
@@ -117,7 +149,9 @@ export const Game: React.FC<{}> = ({}) => {
 						title="Who's that Pokemon?"
 						type1={pokemon.types[0].type.name}
 						type2={pokemon.types[1]?.type?.name ?? ''}
+						stats={gameStats}
 					/>
+
 					<HealthBar health={gameState.health} />
 					<Spacer y={2} />
 					<div className="grid place-items-center pt-4">
@@ -201,6 +235,6 @@ export const Game: React.FC<{}> = ({}) => {
 					</div>
 				</>
 			)}
-		</>
+		</div>
 	);
 };

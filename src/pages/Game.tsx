@@ -41,7 +41,6 @@ const initState = (): GameState => {
 
 const initStats = (): GameStats => {
 	return {
-		averageGuesses: 0,
 		averageScore: 0,
 		gamesPlayed: 0,
 		gamesWon: 0,

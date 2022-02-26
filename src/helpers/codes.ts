@@ -17,7 +17,6 @@ export type GameState = {
 };
 
 export type GameStats = {
-	averageGuesses: number;
 	averageScore: number;
 	gamesPlayed: number;
 	gamesWon: number;

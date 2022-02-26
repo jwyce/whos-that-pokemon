@@ -144,6 +144,7 @@ export const Game: React.FC<{}> = ({}) => {
 							}
 						/>
 						<PokemonFlavorText
+							solution={gameState.solution}
 							flavorTexts={species.flavor_text_entries}
 							visible={
 								gameState.health <= 50 || gameState.gameStatus === Status.WIN

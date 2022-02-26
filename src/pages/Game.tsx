@@ -1,7 +1,13 @@
-import React from 'react';
-import { useQuery } from 'react-query';
+import React, { useState } from 'react';
 
-import { Button, Container, Loading, Text } from '@nextui-org/react';
+import {
+	Button,
+	Container,
+	Input,
+	Loading,
+	Spacer,
+	Text,
+} from '@nextui-org/react';
 
 import { Header } from '../components/Header';
 import { HealthBar } from '../components/HealthBar';
@@ -42,6 +48,7 @@ const initStats = (): GameStats => {
 export const Game: React.FC<{}> = ({}) => {
 	const [gameState, setState] = useStorage<GameState>('gameState', initState());
 	const [gameStats, setStats] = useStorage<GameStats>('gameStats', initStats());
+	const [guess, setGuess] = useState<string>('');
 	if (gameState.solution !== todaysPokemon()) {
 		console.log('Resetting game state');
 		setState(initState());
@@ -65,8 +72,6 @@ export const Game: React.FC<{}> = ({}) => {
 		</Text>;
 	}
 
-	console.log('species', species);
-
 	return (
 		<>
 			<Header
@@ -80,35 +85,51 @@ export const Game: React.FC<{}> = ({}) => {
 					url={getRandomArt(pokemon, gameState.artType)}
 					hidden={gameState.gameStatus === Status.IN_PROGRESS}
 				/>
-				<div
-					style={{
-						display: 'flex',
-						justifyContent: 'center',
-						alignItems: 'center',
-						gap: '.5rem',
-						paddingTop: '1rem',
-					}}
-				>
+				<div className="flex gap-2 justify-center items-center pt-1">
 					{pokemon.types.map((type: any, index: number) => (
 						<Type key={index} title={type.type.name} />
 					))}
 				</div>
-				<div className="pt-2">
-					<b>height: </b>
-					{pokemon.height} decimeters
+				<div className="flex gap-4 justify-center items-center pt-2">
+					<div>
+						<b>Height: </b>
+						{pokemon.height} decimeters
+					</div>
+					<div>
+						<b>Weight: </b>
+						{pokemon.weight} hectograms
+					</div>
 				</div>
-				<div>
-					<b>weight: </b>
-					{pokemon.weight} hectograms
-				</div>
-				<div className="pt-2">{species.generation.name}</div>
-				<div className="pt-2">
-					{species.flavor_text_entries.at(1).flavor_text}
+				<div className="pt-2 capitalize">
+					{species.generation.name.split('-')[0]}-
+					<span className="uppercase">
+						{species.generation.name.split('-')[1]}
+					</span>
 				</div>
 				<div className="pt-2">
-					<Text>
+					{
+						species.flavor_text_entries
+							.filter((x: any) => x.language.name === 'en')
+							.at(1).flavor_text
+					}
+				</div>
+				<div className="pt-2">
+					<Text transform="capitalize">
 						{pokemon.abilities.map((x: any) => x.ability.name).join(', ')}
 					</Text>
+				</div>
+				<Spacer y={3} />
+				<div className="flex gap-4 justify-center items-center pt-1">
+					<Input
+						clearable
+						bordered
+						labelPlaceholder="Pokemon name"
+						value={guess}
+						onChange={(e) => setGuess(e.target.value)}
+					/>
+					<Button color="gradient" auto>
+						Guess
+					</Button>
 				</div>
 			</div>
 		</>

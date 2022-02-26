@@ -18,6 +18,11 @@ import { useStorage } from '../hooks/useLocalStorage';
 import { getRandomArt, getRandomInt } from '../utils/getRandomArt';
 import { todaysPokemon } from '../utils/todaysPokemon';
 import { useFetchPokemon } from '../hooks/useFetchPokemon';
+import { PokemonType } from '../components/PokemonInfo/PokemonType';
+import { PokemonSize } from '../components/PokemonInfo/PokemonSize';
+import { GenerationDexNum } from '../components/PokemonInfo/GenerationDexNum';
+import { PokemonAbilities } from '../components/PokemonInfo/PokemonAbilities';
+import { PokemonFlavorText } from '../components/PokemonInfo/PokemonFlavorText';
 
 const initState = (): GameState => {
 	const secretPokemon = todaysPokemon();
@@ -80,51 +85,23 @@ export const Game: React.FC<{}> = ({}) => {
 						type2={pokemon.types[1]?.type?.name ?? ''}
 					/>
 					<HealthBar health={gameState.health} />
+					<Spacer y={2} />
 					<div className="grid place-items-center pt-4">
+						<PokemonType types={pokemon.types} />
+						<PokemonSize height={pokemon.height} weight={pokemon.weight} />
+						<GenerationDexNum
+							generation={species.generation}
+							dexnums={species.pokedex_numbers}
+						/>
+						<PokemonAbilities abilities={pokemon.abilities} />
+						<PokemonFlavorText flavorTexts={species.flavor_text_entries} />
+
 						<Sprite
 							url={getRandomArt(pokemon, gameState.artType)}
 							hidden={gameState.gameStatus === Status.IN_PROGRESS}
 						/>
-						<div className="flex gap-2 justify-center items-center pt-1">
-							{pokemon.types.map((type: any, index: number) => (
-								<Type key={index} title={type.type.name} />
-							))}
-						</div>
-						<div className="flex gap-4 justify-center items-center pt-2">
-							<div>
-								<b>Height: </b>
-								{pokemon.height} decimeters
-							</div>
-							<div>
-								<b>Weight: </b>
-								{pokemon.weight} hectograms
-							</div>
-						</div>
-						<div className="pt-2 capitalize">
-							{species.generation.name.split('-')[0]}-
-							<span className="uppercase">
-								{species.generation.name.split('-')[1]}
-							</span>{' '}
-							: #
-							{
-								species.pokedex_numbers.filter(
-									(x) => x.pokedex.name === 'national'
-								)[0].entry_number
-							}
-						</div>
-						<div className="pt-2">
-							{
-								species.flavor_text_entries.filter(
-									(x: any) => x.language.name === 'en'
-								)[0].flavor_text
-							}
-						</div>
-						<div className="pt-2">
-							<Text transform="capitalize">
-								{pokemon.abilities.map((x: any) => x.ability.name).join(', ')}
-							</Text>
-						</div>
-						<Spacer y={3} />
+						<Spacer y={2} />
+
 						<div className="flex gap-4 justify-center items-center pt-1">
 							<Input
 								clearable

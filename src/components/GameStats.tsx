@@ -8,7 +8,6 @@ import {
 } from '@nextui-org/react';
 import { GameStats as GameStatsType } from '../helpers/codes';
 import React from 'react';
-import { HealthBar } from './HealthBar';
 
 interface GameStatsProps {
 	stats: GameStatsType;

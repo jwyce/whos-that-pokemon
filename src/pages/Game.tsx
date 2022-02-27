@@ -125,7 +125,7 @@ export const Game: React.FC<{}> = ({}) => {
 				...gameStats,
 				gamesPlayed: gameStats.gamesPlayed + 1,
 				gamesWon: gameStats.gamesWon + 1,
-				maxStreak: Math.max(gameStats.maxStreak, gameStats.currentStreak),
+				maxStreak: Math.max(gameStats.maxStreak, gameStats.currentStreak + 1),
 				currentStreak: gameStats.currentStreak + 1,
 				winPercent:
 					((gameStats.gamesWon + 1) / (gameStats.gamesPlayed + 1)) * 100,

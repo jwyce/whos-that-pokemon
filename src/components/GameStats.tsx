@@ -1,4 +1,11 @@
-import { Card, Container, Modal, Progress, Text } from '@nextui-org/react';
+import {
+	Card,
+	Container,
+	Modal,
+	Progress,
+	Spacer,
+	Text,
+} from '@nextui-org/react';
 import { GameStats as GameStatsType } from '../helpers/codes';
 import React from 'react';
 import { HealthBar } from './HealthBar';
@@ -82,6 +89,7 @@ export const GameStats: React.FC<GameStatsProps> = ({
 						shadow
 					/>
 				</Container>
+				<Spacer y={1} />
 			</Modal.Body>
 		</Modal>
 	);

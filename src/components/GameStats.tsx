@@ -24,7 +24,7 @@ export const GameStats: React.FC<GameStatsProps> = ({
 	return (
 		<Modal
 			closeButton
-			width="550px"
+			width="600px"
 			blur
 			aria-labelledby="modal-title"
 			open={visible}

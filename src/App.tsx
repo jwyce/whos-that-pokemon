@@ -25,9 +25,9 @@ function App() {
 	const queryClient = new QueryClient();
 	return (
 		<QueryClientProvider client={queryClient}>
-			<NextUIProvider theme={darkTheme}>
-				<Game />
-			</NextUIProvider>
+			{/* <NextUIProvider theme={darkTheme}> */}
+			<Game />
+			{/* </NextUIProvider> */}
 		</QueryClientProvider>
 	);
 }

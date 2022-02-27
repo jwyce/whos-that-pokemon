@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 
 interface SpriteProps {
 	url: string;
@@ -8,12 +9,20 @@ interface SpriteProps {
 
 export const Sprite: React.FC<SpriteProps> = ({ url, revealed, visible }) => {
 	return (
-		<img
-			{...(revealed ? { className: 'silhouette' } : {})}
-			src={url}
-			style={{ userSelect: 'none', height: '350px' }}
-			draggable={false}
-			hidden={!visible}
-		/>
+		<>
+			{visible ? (
+				<Image
+					{...(revealed ? { className: 'silhouette' } : {})}
+					src={url}
+					// style={{ userSelect: 'none', height: '350px' }}
+					height={350}
+					width={350}
+					alt="pokemon sprite"
+					draggable={false}
+				/>
+			) : (
+				<React.Fragment></React.Fragment>
+			)}
+		</>
 	);
 };

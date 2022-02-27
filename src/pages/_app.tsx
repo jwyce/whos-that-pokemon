@@ -1,10 +1,10 @@
-import './index.css';
+import '../../styles/globals.css';
 
 import { QueryClient, QueryClientProvider } from 'react-query';
 
-import { Game } from './pages/Game';
 import { createTheme, NextUIProvider } from '@nextui-org/react';
 
+import type { AppProps } from 'next/app';
 const darkTheme = createTheme({
 	type: 'dark',
 	theme: {
@@ -21,15 +21,26 @@ const darkTheme = createTheme({
 	},
 });
 
-function App() {
+function SafeHydrate({ children }: any) {
+	return (
+		<div suppressHydrationWarning>
+			{typeof window === 'undefined' ? null : children}
+		</div>
+	);
+}
+
+function WhosThatPokemon({ Component, pageProps }: AppProps) {
 	const queryClient = new QueryClient();
+
 	return (
 		<QueryClientProvider client={queryClient}>
-			{/* <NextUIProvider theme={darkTheme}> */}
-			<Game />
-			{/* </NextUIProvider> */}
+			<NextUIProvider theme={darkTheme}>
+				<SafeHydrate>
+					<Component {...pageProps} />
+				</SafeHydrate>
+			</NextUIProvider>
 		</QueryClientProvider>
 	);
 }
 
-export default App;
+export default WhosThatPokemon;

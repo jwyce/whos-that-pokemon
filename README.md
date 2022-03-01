@@ -21,6 +21,7 @@ Spin off the New York Time's Wordle game, but with Pokemon!
 - [ ] show previous guesses?
 - [ ] hide pokedex number until game over
 - [ ] add tests
+- [x] make UI responsive (mobile)
 - [x] add logic for loosing
 - [x] on game over, show all info and show pokemon name with confetti
 - [ ] add ability to share results with friends (modal?)

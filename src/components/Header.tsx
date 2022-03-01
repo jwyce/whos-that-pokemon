@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Row, Text } from '@nextui-org/react';
+import { Row, Text } from '@nextui-org/react';
 import { getTypeColor } from '../utils/getTypeColor';
 import { Chart } from 'react-iconly';
 import { GameStats } from './GameStats';
@@ -39,13 +39,9 @@ export const Header: React.FC<HeaderProps> = ({
 			>
 				{title}
 			</Text>
-			<Button
-				auto
-				color="secondary"
-				icon={<Chart filled />}
-				shadow
-				onClick={handler}
-			/>
+			<div className="cursor-pointer" onClick={handler}>
+				<Chart filled primaryColor="#a152ce" secondaryColor="#fff" size={36} />
+			</div>
 			<GameStats visible={visible} closeHandler={closeHandler} stats={stats} />
 		</Row>
 	);

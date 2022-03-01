@@ -35,9 +35,9 @@ export const GameStats: React.FC<GameStatsProps> = ({
 				</Text>
 			</Modal.Header>
 			<Modal.Body>
-				<div className="flex items-center justify-center gap-3">
+				<div className="flex items-center justify-center gap-3 md:flex-row flex-col">
 					<Card>
-						<Text h1 css={{ textAlign: 'center' }}>
+						<Text h1 className="text-center md:text-5xl text-4xl">
 							{stats.gamesPlayed}
 						</Text>
 						<Text size={12} css={{ textAlign: 'center' }}>
@@ -45,7 +45,7 @@ export const GameStats: React.FC<GameStatsProps> = ({
 						</Text>
 					</Card>
 					<Card>
-						<Text h1 css={{ textAlign: 'center' }}>
+						<Text h1 className="text-center md:text-5xl text-4xl">
 							{stats.winPercent}
 						</Text>
 						<Text size={12} css={{ textAlign: 'center' }}>
@@ -53,7 +53,7 @@ export const GameStats: React.FC<GameStatsProps> = ({
 						</Text>
 					</Card>
 					<Card>
-						<Text h1 css={{ textAlign: 'center' }}>
+						<Text h1 className="text-center md:text-5xl text-4xl">
 							{stats.currentStreak}
 						</Text>
 						<Text size={12} css={{ textAlign: 'center' }}>
@@ -61,7 +61,7 @@ export const GameStats: React.FC<GameStatsProps> = ({
 						</Text>
 					</Card>
 					<Card>
-						<Text h1 css={{ textAlign: 'center' }}>
+						<Text h1 className="text-center md:text-5xl text-4xl">
 							{stats.maxStreak}
 						</Text>
 						<Text size={12} css={{ textAlign: 'center' }}>

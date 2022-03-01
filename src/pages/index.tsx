@@ -161,7 +161,6 @@ const Game: NextPage = () => {
 						/>
 
 						<HealthBar health={gameState.health} />
-						<Spacer y={2} />
 						<div className="grid place-items-center pt-4">
 							<PokemonType types={pokemon.types} />
 							<PokemonSize

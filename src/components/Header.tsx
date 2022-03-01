@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Row, Text } from '@nextui-org/react';
+import { Row, Text } from '@nextui-org/react';
 import { getTypeColor } from '../utils/getTypeColor';
 import { Chart } from 'react-iconly';
 import { GameStats } from './GameStats';

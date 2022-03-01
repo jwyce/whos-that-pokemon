@@ -39,13 +39,9 @@ export const Header: React.FC<HeaderProps> = ({
 			>
 				{title}
 			</Text>
-			<Button
-				auto
-				color="secondary"
-				icon={<Chart filled />}
-				shadow
-				onClick={handler}
-			/>
+			<div className="cursor-pointer" onClick={handler}>
+				<Chart filled primaryColor="#a152ce" secondaryColor="#fff" size={36} />
+			</div>
 			<GameStats visible={visible} closeHandler={closeHandler} stats={stats} />
 		</Row>
 	);

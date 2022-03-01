@@ -28,10 +28,10 @@ export const Header: React.FC<HeaderProps> = ({
 	};
 
 	return (
-		<Row justify="center" align="center" gap={2}>
+		<Row justify="center" align="center" gap={2} className="pt-4 md:pt-1">
 			<Text
 				h1
-				size="xxx-large"
+				className="md:text-6xl sm:text-5xl text-3xl"
 				css={{
 					textGradient: `45deg, ${color1} 0%, ${color2} 100%`,
 				}}

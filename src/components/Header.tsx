@@ -31,7 +31,7 @@ export const Header: React.FC<HeaderProps> = ({
 		<Row justify="center" align="center" gap={2} className="pt-4 md:pt-1">
 			<Text
 				h1
-				className="md:text-6xl sm:text-5xl text-3xl"
+				className="md:text-6xl sm:text-5xl xs:text-3xl text-2xl"
 				css={{
 					textGradient: `45deg, ${color1} 0%, ${color2} 100%`,
 				}}

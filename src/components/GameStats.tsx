@@ -78,7 +78,7 @@ export const GameStats: React.FC<GameStatsProps> = ({
 						}}
 						weight="bold"
 					>
-						Avg Score: {stats.averageScore}
+						Avg Score: {stats.averageScore.toFixed(1)}
 					</Text>
 					<Progress
 						value={stats.averageScore}

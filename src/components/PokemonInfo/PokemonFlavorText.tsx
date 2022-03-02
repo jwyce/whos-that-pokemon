@@ -13,7 +13,7 @@ export const PokemonFlavorText: React.FC<PokemonFlavorTextProps> = ({
 	solution,
 }) => {
 	return (
-		<div hidden={!visible} className="text-center px-2">
+		<div hidden={!visible} className="text-center mx-2">
 			{flavorTexts
 				.filter((x: any) => x.language.name === 'en')[0]
 				.flavor_text.replaceAll(solution.toUpperCase(), 'This POKéMON')}

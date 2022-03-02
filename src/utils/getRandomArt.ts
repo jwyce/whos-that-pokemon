@@ -5,15 +5,16 @@ export enum ArtType {
 }
 
 export const getRandomArt = (pokemon: any, artType: ArtType) => {
+	const defaultArt = pokemon.sprites.other['official-artwork'].front_default;
+
 	switch (artType) {
 		case ArtType.DREAM_WORLD:
-			return pokemon.sprites.other.dream_world.front_default;
+			return pokemon.sprites?.other?.dream_world?.front_default || defaultArt;
 		case ArtType.HOME:
-			return pokemon.sprites.other.home.front_default;
+			return pokemon.sprites?.other?.home?.front_default || defaultArt;
 		case ArtType.OFFICIAL:
-			return pokemon.sprites.other['official-artwork'].front_default;
 		default:
-			return pokemon.sprites.other['official-artwork'].front_default;
+			return defaultArt;
 	}
 };
 

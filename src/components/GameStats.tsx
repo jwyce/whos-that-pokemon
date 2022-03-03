@@ -46,7 +46,7 @@ export const GameStats: React.FC<GameStatsProps> = ({
 					</Card>
 					<Card>
 						<Text h1 className="text-center md:text-5xl text-4xl">
-							{stats.winPercent}
+							{stats.winPercent.toFixed(1)}
 						</Text>
 						<Text size={12} css={{ textAlign: 'center' }}>
 							Win %

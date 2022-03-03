@@ -14,8 +14,8 @@ export const Sprite: React.FC<SpriteProps> = ({ url, revealed, visible }) => {
 				<Image
 					{...(revealed ? { className: 'silhouette' } : {})}
 					src={url}
-					height={300}
-					width={300}
+					height={250}
+					width={250}
 					alt="pokemon sprite"
 					draggable={false}
 				/>

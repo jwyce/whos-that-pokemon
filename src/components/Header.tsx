@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Text } from '@nextui-org/react';
+import { Text } from '@nextui-org/react';
 import { getTypeColor } from '../utils/getTypeColor';
 import { Chart } from 'react-iconly';
 import { GameStats } from './GameStats';
@@ -28,12 +28,12 @@ export const Header: React.FC<HeaderProps> = ({
 	};
 
 	return (
-		<Row justify="center" align="center" gap={2} className="pt-4 md:pt-1">
+		<div className="pt-4 md:pt-1 flex justify-center items-center gap-2 flex-row">
 			<Text
 				h1
 				className="md:text-6xl sm:text-5xl xs:text-3xl text-2xl"
 				css={{
-					textGradient: `45deg, ${color1} 0%, ${color2} 100%`,
+					textGradient: `45deg, ${color1} -20%, ${color2} 100%`,
 				}}
 				weight="bold"
 			>
@@ -43,6 +43,6 @@ export const Header: React.FC<HeaderProps> = ({
 				<Chart filled primaryColor="#a152ce" secondaryColor="#fff" size={36} />
 			</div>
 			<GameStats visible={visible} closeHandler={closeHandler} stats={stats} />
-		</Row>
+		</div>
 	);
 };

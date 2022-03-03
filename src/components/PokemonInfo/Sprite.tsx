@@ -16,7 +16,6 @@ export const Sprite: React.FC<SpriteProps> = ({ url, revealed, visible }) => {
 					src={url}
 					height={300}
 					width={300}
-					layout="responsive"
 					alt="pokemon sprite"
 					draggable={false}
 				/>
